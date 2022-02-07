@@ -20,6 +20,14 @@
 		<result property="companyCode" column="comp_code" />
 	</resultMap>
 
+	<resultMap id="selectUserByPassWordResultMap" class="user">
+		<result property="password" column="member_pw" />
+	</resultMap>
+
+	<select id="selectUserByPassWord" parameterClass="map" resultMap="selectUserByPassWordResultMap">
+		SELECT CAST(AES_DECRYPT(UNHEX(#password#), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) member_pw
+	</select>
+
 	<select id="selectDomains" resultMap="selectDomainsResultMap">
 		SELECT group_code AS schema_name
 		     , comp_domain AS domain_name
