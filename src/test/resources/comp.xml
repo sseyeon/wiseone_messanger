@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<list>
+    <company>
+        <companyCode>00168</companyCode>
+        <companyName><![CDATA[UNICO LOGISTICS]]></companyName>
+        <scompCode>00168</scompCode>
+        <domainName><![CDATA[unicologx.com]]></domainName>
+    </company>
+    <company>
+        <companyCode>00170</companyCode>
+        <companyName><![CDATA[UNICO SHIPPING]]></companyName>
+        <scompCode>00168</scompCode>
+        <domainName><![CDATA[unicoshpg.com]]></domainName>
+    </company>
+</list>

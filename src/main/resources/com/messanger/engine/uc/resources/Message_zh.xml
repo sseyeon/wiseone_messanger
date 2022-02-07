@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<entry key="10001">使用者不存在</entry>
+	<entry key="10002">密码不正确</entry>
+	<entry key="10003">公司信息不存在</entry>
+	<entry key="10004">部门信息不存在</entry>
+	<entry key="10005">使用者信息不存在</entry>
+	<entry key="10006">消息类型不正确</entry>
+	<entry key="10007">标头的UID的字节长度不正确</entry>
+	<entry key="10008">属性的长度值与实际的属性字节长度不同</entry>
+	<entry key="10009">数据长度值与实际的数据字节长度不同</entry>
+	<entry key="10010">登录的消息标头类型不正确</entry>
+	<entry key="10011">位置信息不正确</entry>
+	<entry key="10013">接收消息的对象UID不存在</entry>
+	<entry key="10014">没有要传送的消息</entry>
+	<entry key="10015">{0}不是连接状态</entry>
+	<entry key="10016">向{0}传送消息失败</entry>
+	<entry key="10017">向{0}传送留言失败</entry>
+	<entry key="10018">不能连接数据库</entry>
+	<entry key="10019">不能读取环境设置文件</entry>
+	<entry key="10020">系统生成使用者文件夹时发生错误</entry>
+	<entry key="10021">{0} 使用者会话不存在</entry>
+	<entry key="10022">要变更的使用者状态值不存在</entry>
+	<entry key="10023">聊天室的ID信息不存在</entry>
+	<entry key="10024">没有要传送的文件名信息</entry>
+	<entry key="10025">没有要传送的文件大小信息</entry>
+	<entry key="10026">现在不支持向多名使用者转达文件的功能</entry>
+	<entry key="10027">现在不支持相应的程序编码[{0}] </entry>
+	<entry key="10028">不支持现在使用的版本[{0}]客户端，请升级[{1}]版本客户端之后再使用。</entry>
+		
+	<!-- XFon Message -->
+	<entry key="11001">PBX连接故障。与PBX连接断开消息未能处理，请稍后再试。</entry>
+	<entry key="11002">申请的号码不是数字，请确认后再试。</entry>	
+	<entry key="11003">申请的号码不存在，请确认后再试。</entry>
+	<entry key="11004">不是通话中的号码。</entry>	
+	<entry key="11005">请确认发送人或收信人的电话号码。</entry>
+	
+	<entry key="11101">从{0}({1})到{2}有未接来电</entry>
+	<entry key="11201">电话号码[{0}] 格式不正确，请确认。</entry>
+	
+	<!-- APNS -->
+	<entry key="C000011">메일 도착. [ {0} ]</entry>
+	<entry key="C000001">결제 도착.</entry>
+</properties>

@@ -1,0 +1,1 @@
+nohup ./uc server > /dev/null &

@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Fri Oct 10 16:57:59 PDT 2014
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=spring-core-context.jar
+manifest.mergeall=true
+manifest.mainclass=
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=

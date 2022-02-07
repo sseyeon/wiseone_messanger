@@ -1,0 +1,37 @@
+@echo off
+
+if !%1==! (
+  echo Usage: uc COMMAND
+  echo where COMMAND is one of:
+  echo server               run uc server
+  echo xml                  reload organization xml file
+  echo or
+  echo CLASSNAME            run the class named CLASSNAME
+  goto QUIT
+)
+
+set COMMAND=%1
+if "%1" == "server" set COMMAND=com.messanger.engine.uc.ServerLauncher
+if "%1" == "xml" set COMMAND=com.messanger.engine.uc.service.OrganizationXmlWriteServiceImpl
+
+set JAVA_HOME=c:\Program Files\Java\jdk1.6.0_24
+set path=%JAVA_HOME%\bin\
+set UC_HOME=..\
+set UC_LIB=%UC_HOME%\lib
+set CLASSPATH=%UC_HOME%\conf
+
+set JAVA_OPTS=-Xms512M -Xmx1024M -XX:PermSize=64M -XX:MaxPermSize=128M
+
+FOR %%F IN (%UC_LIB%\*.jar) DO call :addcp %%F
+goto endaddcp
+ 
+:addcp
+set CLASSPATH=%CLASSPATH%;%1
+goto :eof
+ 
+:endaddcp
+
+java %JAVA_OPTS% -classpath "%CLASSPATH%" %COMMAND%
+
+:QUIT
+pause
