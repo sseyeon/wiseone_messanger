@@ -1,0 +1,36 @@
+
+L
+java:S3740-"/Provide the parametrized type for this generic.(’žñ›8 Åžªì/
+Q
+java:S3740;"/Provide the parametrized type for this generic.(çôµ·úÿÿÿÿ8 Åžªì/
+R
+java:S1133&"5Do not forget to remove this deprecated code someday.(ÕãªÍ8¡Åžªì/
+D
+java:S1123&"'Add the missing @Deprecated annotation.(ÕãªÍ8¡Åžªì/
+t
+java:S3776P"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(ì£•šýÿÿÿÿ8¦Åžªì/
+]	java:S125\"<This block of commented-out lines of code should be removed.(À—»ïýÿÿÿÿ8¯Åžªì/
+X	java:S125q"<This block of commented-out lines of code should be removed.(†‰ÑÏ8²Åžªì/
+Y	java:S125"<This block of commented-out lines of code should be removed.(êˆ³8´Åžªì/
+\
+java:S4719†"9Replace charset name argument with StandardCharsets.UTF_8(€ó†Çþÿÿÿÿ8¶Åžªì/
+W
+java:S4719‰"9Replace charset name argument with StandardCharsets.UTF_8(È±¨Ø8¸Åžªì/
+\
+java:S4719Œ"9Replace charset name argument with StandardCharsets.UTF_8(ùëíÃüÿÿÿÿ8¹Åžªì/
+\
+java:S4719—"9Replace charset name argument with StandardCharsets.UTF_8(²Ô´€ÿÿÿÿÿ8¹Åžªì/
+I
+java:S1075—"&Remove this hard-coded path-delimiter.(²Ô´€ÿÿÿÿÿ8ºÅžªì/
+J
+java:S1128".Remove this unused import 'java.util.HashSet'.(Ê‚êX8¼Åžªì/
+v
+java:S2293["YReplace the type specification in this constructor call with the diamond operator ("<>").(®èò³8¼Åžªì/
+{
+java:S2293^"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ü´¶Àùÿÿÿÿ8¼Åžªì/
+i
+java:S1192†"FDefine a constant instead of duplicating this literal "UTF-8" 4 times.(€ó†Çþÿÿÿÿ8½Åžªì/
+W
+java:S1141e"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8½Åžªì/
+L
+java:S5411h"*Use the primitive boolean expression here.(‡¹Ûïúÿÿÿÿ8¾Åžªì/

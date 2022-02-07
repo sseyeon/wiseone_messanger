@@ -1,0 +1,62 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	
+	<bean id="iptPhoneBook" class="com.messanger.engine.uc.ipt.PhoneBook"
+		init-method="load" depends-on="commonService">
+		<constructor-arg index="0" ref="config" />
+	</bean>
+	
+	<bean id="iptService" class="com.messanger.engine.uc.ipt.vendor.cisco.CiscoIptService"
+        init-method="init">
+        <property name="phoneBook" ref="iptPhoneBook" />
+        <property name="config" ref="config" />
+    </bean>
+    
+    <bean id="ciscoIptEvent" class="com.messanger.engine.uc.ipt.vendor.cisco.CiscoIptEvent"
+		init-method="init">
+		<constructor-arg index="0" ref="config" />
+		<property name="peerEventMsgRetHandler" ref="peerEventMsgRetHandler" />
+		<property name="phoneBook" ref="iptPhoneBook" />
+	</bean>
+	
+	<bean id="peerEventMsgRetHandler" class="com.messanger.engine.uc.ipt.handler.PeerEventMsgRetHandler">
+        <property name="iptService" ref="iptService" />
+    </bean>
+
+	<bean id="loadPhoneBook"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="iptPhoneBook" />
+		</property>
+		<property name="targetMethod">
+			<value>load</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	
+	<bean id="loadPhoneBookTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="loadPhoneBook" />
+		<!-- 
+			1 Seconds (0-59)
+			2 Minutes (0-59)
+			3 Hours (0-23)
+			4 Day of month (1-31)
+			5 Month (1-12 or JAN-DEC)
+			6 Day of week (1-7 or SUN-SAT)
+			7 Year (1970-2099)
+  		-->
+		<property name="cronExpression" value="0 30 */2 * * ?" />
+	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>		
+				<ref bean="loadPhoneBookTrigger" />				
+			</list>
+		</property>
+	</bean>	    
+
+</beans>

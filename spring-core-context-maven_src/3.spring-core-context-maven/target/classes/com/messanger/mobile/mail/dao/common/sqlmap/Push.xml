@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Push">
+
+	<resultMap id="userToken" class="com.messanger.mobile.mail.model.MobileUserToken">
+		<result property="email" column="EMAIL"/>
+		<result property="phnKey" column="PHN_KEY"/>
+		<result property="phnFlag" column="PHN_FLAG"/> 
+	</resultMap>
+	
+	<select id="selectTokenList" resultMap="userToken">
+		SELECT EMAIL, PHN_KEY, PHN_FLAG FROM (
+			SELECT EMAIL, PHN_KEY, PHN_FLAG
+			FROM TMB0001
+			<iterate property="userList" prepend=" WHERE EMAIL IN " conjunction="," open="(" close=")">
+				#userList[]# 
+			</iterate>
+		) A
+		<dynamic prepend="WHERE">
+			<isNotNull property="phnFlag">
+				PHN_FLAG = #phnFlag#
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="selectEmailCount" parameterClass="map" resultClass="integer">
+		SELECT 
+			CASE WHEN emailCount IS NULL THEN 0 ELSE emailCount END
+		FROM (
+			SELECT COUNT(*) AS emailCount 
+			FROM $schema$.TMB0001 
+			WHERE EMAIL = #email#
+		) A
+	</select>
+	 
+</sqlMap>

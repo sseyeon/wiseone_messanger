@@ -1,0 +1,37 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">	
+	<bean id="uwoDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${uwo.jdbc.driverClassName}" />
+		<property name="url" value="${uwo.jdbc.url}" />
+		<property name="username" value="${uwo.jdbc.username}" />
+		<property name="password" value="${uwo.jdbc.password}" />
+		<property name="initialSize" value="${dbcp.initialSize}" />
+		<property name="maxActive" value="${dbcp.maxActive}" />
+		<property name="maxWait" value="${dbcp.maxWait}" />
+		<property name="minIdle" value="${dbcp.minIdle}" /> 
+	</bean>
+	<bean id="uwoSqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation"
+			value="classpath:SqlMapConfig.xml" />
+		<property name="dataSource" ref="uwoDataSource" />
+	</bean>
+	 
+	<bean id="uwoCommonDao" class="com.messanger.engine.uc.dao.CommonDaoImpl">
+		<property name="sqlMapClient" ref="uwoSqlMapClient" />
+	</bean>
+	 
+	<bean id="commonDaos" class="com.messanger.engine.uc.dao.CommonDaos">
+		<property name="daos">
+			<map>
+				<entry>
+					<key>
+						<value>uwo</value>
+					</key>
+					<ref bean="uwoCommonDao" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+</beans>

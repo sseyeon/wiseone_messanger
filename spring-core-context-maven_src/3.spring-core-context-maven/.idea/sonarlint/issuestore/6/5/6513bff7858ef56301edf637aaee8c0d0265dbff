@@ -1,0 +1,8 @@
+
+V	java:S1253"<This block of commented-out lines of code should be removed.(ˆ¯¦âùÿÿÿÿ
+P	java:S125H"<This block of commented-out lines of code should be removed.(•¥¦
+V	java:S125N"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ
+[
+java:S1128"ERemove this unused import 'com.messanger.engine.uc.utils.DebugUtils'.(ûÊë‹
+]
+java:S2259Q"GA "NullPointerException" could be thrown; "resultMap" is nullable here.(Ø¿Åş

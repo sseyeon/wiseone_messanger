@@ -1,0 +1,59 @@
+# export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home
+bin=`dirname "$0"`
+bin=`cd "$bin"; pwd`
+
+# load uc enviroment variable
+. "$bin"/uc-config.sh
+
+# if no args specified, show usage
+if [ $# = 0 ]; then
+  echo "Usage: uc COMMAND"
+  echo "where COMMAND is one of:"
+  echo "  server               run uc server"
+  echo "  xml                  reload organization xml file"
+  echo "  or"
+  echo "  CLASSNAME            run the class named CLASSNAME"  
+  exit 1
+fi
+
+# get arguments
+COMMAND=$1
+shift
+
+# some Java parameters
+if [ "$JAVA_HOME" != "" ]; then
+  #echo "run java in $JAVA_HOME"
+  JAVA_HOME=$JAVA_HOME
+fi
+  
+if [ "$JAVA_HOME" = "" ]; then
+  echo "Error: JAVA_HOME is not set."
+  exit 1
+fi
+
+JAVA=$JAVA_HOME/bin/java
+JAVA_HEAP_MAX=-Xmx512m 
+JAVA_OPTS="-showversion -Xms128m -XX:PermSize=64M -XX:MaxPermSize=128M"
+
+# CLASSPATH initially contains $UC_CONF
+CLASSPATH="$UC_CONF"
+#CLASSPATH=${CLASSPATH}:$JAVA_HOME/lib/tools.jar
+
+# add libs to CLASSPATH
+for f in $UC_LIB/*.jar; do
+  CLASSPATH=${CLASSPATH}:$f;
+done
+
+# figure out which class to run
+if [ "$COMMAND" = "server" ] ; then
+  CLASS='com.messanger.engine.uc.ServerLauncher'  
+elif [ "$COMMAND" = "xml" ] ; then
+  CLASS='com.messanger.engine.uc.service.OrganizationXmlWriteServiceImpl'  
+else
+  CLASS=$COMMAND
+fi
+
+#UC_OPTS="$UC_OPTS" -Dlog4j.configuration="${UC_CONF}/log4j.properties"
+
+# run it
+exec "$JAVA" $JAVA_HEAP_MAX $JAVA_OPTS $UC_OPTS -classpath "$CLASSPATH" $CLASS "$@"

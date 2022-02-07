@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="3.spring-core-context-maven/src/main/java"/>
+	<classpathentry kind="src" path="3.spring-core-context-maven/src/test/java"/>
+	<classpathentry kind="lib" path="__MACOSX/3.spring-core-context-maven/._spring-core-context.jar"/>
+	<classpathentry kind="lib" path="3.spring-core-context-maven/spring-core-context.jar"/>
+	<classpathentry kind="output" path="3.spring-core-context-maven/target/classes"/>
+</classpath>

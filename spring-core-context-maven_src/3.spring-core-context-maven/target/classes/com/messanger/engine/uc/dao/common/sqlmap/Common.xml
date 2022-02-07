@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="common">
+	<typeAlias alias="user" type="com.messanger.engine.uc.model.User" />
+	<resultMap id="selectUserByIdOrEmpNoResultMap" class="user">
+		<result property="userid" column="userid" />
+		<result property="password" column="password" />
+		<result property="userName" column="user_name" />
+		<result property="posCode" column="posCode" />
+		<result property="compPhoneNumber" column="compphone_number" />
+		<result property="email" column="email" />
+<!-- 		<result property="onlineId" column="online_id" /> -->
+	</resultMap>	
+	
+	
+	<resultMap id="selectUserByPassWordResultMap" class="user">
+		<result property="password" column="member_pw" />
+	</resultMap>
+	
+	
+	<select id="selectUserByPassWord" parameterClass="map" resultMap="selectUserByPassWordResultMap">
+		SELECT fn_sha256_encrypt(#password#) member_pw
+	</select>
+	
+	<select id="selectUserByUserId" parameterClass="map" resultMap="selectUserByIdOrEmpNoResultMap">
+	 <!-- 
+		SELECT mid as userid, mpw as pwdhash, mname as user_name, mid as empno, mhp as compphone_number, '' as online_id
+		FROM TblMember
+		WHERE mid = #userid#	
+		 -->
+		SELECT
+		userid userid,
+		user_name user_name,
+			pos_code posCode, 
+			dept_code deptCode,
+		CAST(AES_DECRYPT(UNHEX(mobile), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) compphone_number,
+		CAST(AES_DECRYPT(UNHEX(password), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) password,
+		CAST(AES_DECRYPT(UNHEX(email), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) email/*,
+			charge_yn,
+			auth_code */
+		FROM msg_user
+		WHERE userid=#userid#
+		AND company_code = #compCode#
+		AND del_yn = 'N' 
+	</select>
+	<select id="selectUserByEmpNo" parameterClass="map" resultMap="selectUserByIdOrEmpNoResultMap">
+	<!--  
+		SELECT
+		  a.userid as userid, a.pwdhash as password, v.user_name as user_name, a.empno as empno,
+		  a.compphone_number as compphone_number
+		<isEqual property="isOnlineId" compareValue="true">
+			,a.online_id as online_id
+		</isEqual>
+		<isEqual property="isOnlineId" compareValue="false">
+			,'' as online_id
+		</isEqual>			  
+		  FROM $schema$.TOR1030 A
+		  
+		  LEFT OUTER JOIN $schema$.TOR1010 B
+		  ON A.COMPANY_CODE = B.COMPANY_CODE
+		  AND B.DOMAIN_NAME = #domain#
+		  
+		  LEFT OUTER JOIN $schema$.TOR1031 C
+		  ON A.USERINDEX = C.USERINDEX  AND C.SECONDARY = #domain#
+		  
+		  LEFT OUTER JOIN $schema$.TOR1035 D
+		  ON A.USERINDEX = D.USERINDEX
+		  AND D.USEYN = '1'
+		  
+		  LEFT OUTER JOIN $schema$.vor1030 V
+		  ON A.USERINDEX = V.USERINDEX
+		  AND V.locale = #locale#  
+		WHERE (A.EMPNO = #empno# OR D.EMPNO = #empno#)
+		AND (B.DOMAIN_NAME IS NOT NULL OR C.SECONDARY IS NOT NULL)
+		AND A.USEYN = '1'
+		-->
+		
+		
+		SELECT
+		userid userid,
+		user_name user_name,
+			pos_code posCode, 
+			dept_code deptCode,
+		    CAST(AES_DECRYPT(UNHEX(mobile), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) compphone_number,
+		    CAST(AES_DECRYPT(UNHEX(password), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) password,
+		    CAST(AES_DECRYPT(UNHEX(email), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) email
+		FROM msg_user
+		WHERE userid=#userid#
+		  AND company_code = #compCode#
+		AND del_yn = 'N'
+	</select>
+	<select id="selectPasswordBuilderClassName" parameterClass="String" resultClass="String">
+		SELECT ITEM_VALUE
+		FROM TCM6121
+		WHERE WAS_ID = #was_id#
+		AND CATEGORY_CODE = 'ST'
+		AND ITEM_CODE = 'PASSWORD_BUILDER_CLASS_NAME'
+	</select>	
+</sqlMap>

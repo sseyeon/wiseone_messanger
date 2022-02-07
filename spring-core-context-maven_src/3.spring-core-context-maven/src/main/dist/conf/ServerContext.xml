@@ -1,0 +1,409 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:tx="http://www.springframework.org/schema/tx"
+ xmlns:p="http://www.springframework.org/schema/p"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+ 					 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"> 	
+	<import resource="CommonContext.xml" />
+	<import resource="DaoContext.xml" />
+	 
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<entry key="java.net.SocketAddress">
+					<bean class="org.apache.mina.integration.spring.InetSocketAddressEditor" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="demuxingUCServerHandler"
+		class="com.messanger.engine.uc.handler.DemuxingUCServerHandler">
+		<constructor-arg index="0">
+			<list>
+				<value>com.messanger.engine.uc.message.request.ALCKRequest</value>
+				<value>com.messanger.engine.uc.message.request.EVNTRequest</value>
+				<value>com.messanger.engine.uc.message.request.MSGIRequest</value>				
+				<value>com.messanger.engine.uc.message.request.ORG_Request</value>
+				<value>com.messanger.engine.uc.message.request.LGINRequest</value>				
+				<value>com.messanger.engine.uc.message.request.FILRRequest</value>
+				<value>com.messanger.engine.uc.message.request.GRPRRequest</value>
+				<value>com.messanger.engine.uc.message.request.MEMRRequest</value>
+				<value>com.messanger.engine.uc.message.request.FILDRequest</value>
+				<value>com.messanger.engine.uc.message.request.FILSRequest</value>
+				<value>com.messanger.engine.uc.message.request.GRPSRequest</value>
+				<value>com.messanger.engine.uc.message.request.MEMSRequest</value>
+				<value>com.messanger.engine.uc.message.request.MSGSRequest</value>				
+				<value>com.messanger.engine.uc.message.request.USR_Request</value>				
+				<!--value>com.messanger.engine.uc.message.request.GWURRequest</value-->
+				
+				<value>com.messanger.engine.uc.message.request.PDIARequest</value>
+				<value>com.messanger.engine.uc.message.request.PDISRequest</value>
+				<value>com.messanger.engine.uc.message.request.PFWDRequest</value>
+				<value>com.messanger.engine.uc.message.request.WCISRequest</value>
+				<value>com.messanger.engine.uc.message.request.WCIRRequest</value>
+				<value>com.messanger.engine.uc.message.request.WCIORequest</value>
+				<value>com.messanger.engine.uc.message.request.RCISRequest</value>
+				<value>com.messanger.engine.uc.message.request.RCIRRequest</value>
+				
+				<value>com.messanger.engine.uc.message.request.ONIDRequest</value>
+				<value>com.messanger.engine.uc.message.request.PWCHRequest</value>
+				<value>com.messanger.engine.uc.message.request.ORGSRequest</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg index="1">
+			<list>
+				<ref bean="ALCKHandler" />
+				<ref bean="EVNTHandler" />				
+				<ref bean="MSGIHandler" />				
+				<ref bean="ORG_Handler" />
+				<ref bean="LGINHandler" />
+				<ref bean="FILRHandler" />
+				<ref bean="GRPRHandler" />
+				<ref bean="MEMRHandler" />				
+				<ref bean="FILDHandler" />
+				<ref bean="FILSHandler" />				
+				<ref bean="GRPSHandler" />
+				<ref bean="MEMSHandler" />
+				<ref bean="MSGSHandler" />
+				<ref bean="USR_Handler" />
+				<!--ef bean="GWURHandler" /-->
+				
+				<ref bean="PDIAHandler" />
+				<ref bean="PDISHandler" />
+				<ref bean="PFWDHandler" />
+				<ref bean="WCISHandler" />
+				<ref bean="WCIRHandler" />
+				<ref bean="WCIOHandler" />
+				<ref bean="RCISHandler" />
+				<ref bean="RCIRHandler" />
+				
+				<ref bean="ONIDHandler" />
+				<ref bean="PWCHHandler" />
+				<ref bean="ORGSHandler" />
+			</list>
+		</constructor-arg>
+		<property name="config" ref="config" />
+	</bean>
+	
+	<!-- AliveCheckHandler -->
+	<bean id="ALCKHandler" class="com.messanger.engine.uc.handler.ALCKHandler" />
+	
+	<!-- EventHandler -->
+	<bean id="EVNTHandler" class="com.messanger.engine.uc.handler.EVNTHandler">
+		<property name="config" ref="config" />
+		<property name="commonService" ref="commonService" />
+<!--		<property name="mobilePushService" ref="mobilePushService" />-->
+		<property name="messageSource" ref="messageSource" /> 
+	</bean>
+	
+	<!-- InputMsgHandler -->
+	<bean id="MSGIHandler" class="com.messanger.engine.uc.handler.MSGIHandler" >
+		<property name="messageSource" ref="messageSource" />
+	</bean>
+	
+	<!-- ListHandler -->
+	<bean id="ORG_Handler" class="com.messanger.engine.uc.handler.ORG_Handler">
+		<property name="messageSource" ref="messageSource" /> 
+		<property name="commonService" ref="commonService" />	
+	</bean>
+	
+	<!-- ListHandler -->
+	<bean id="ORGSHandler" class="com.messanger.engine.uc.handler.ORGSHandler">
+		<property name="messageSource" ref="messageSource" /> 
+		<property name="commonService" ref="commonService" />	
+	</bean>
+	
+	<!-- LoginHandler -->
+	<bean id="LGINHandler" class="com.messanger.engine.uc.handler.LGINHandler">
+		<property name="messageSource" ref="messageSource" /> 
+		<property name="commonService" ref="commonService" />
+		<property name="config" ref="config" />
+		<property name="iptService" ref="iptService" />
+	</bean>
+	
+	<!-- ReceiveFileHandler -->
+	<bean id="FILRHandler" class="com.messanger.engine.uc.handler.FILRHandler">
+		<property name="messageSource" ref="messageSource" />
+	</bean>
+
+	<!-- ReceiveGrpHandler -->
+	<bean id="GRPRHandler" class="com.messanger.engine.uc.handler.GRPRHandler" >
+		<property name="commonService" ref="commonService" />
+	</bean>
+	
+	<!-- ReceiveMemoHandler -->
+	<bean id="MEMRHandler" class="com.messanger.engine.uc.handler.MEMRHandler" >
+		<property name="messageSource" ref="messageSource" />
+		<property name="commonService" ref="commonService" />
+	</bean>
+	
+	<!-- SendFileDataMsgHandler -->
+	<bean id="FILDHandler" class="com.messanger.engine.uc.handler.FILDHandler" >
+		<property name="messageSource" ref="messageSource" />
+	</bean>
+	
+	<!-- SendFileHandler -->
+	<bean id="FILSHandler" class="com.messanger.engine.uc.handler.FILSHandler" >
+		<property name="messageSource" ref="messageSource" />
+	</bean>
+	
+	<!-- SendGrpHandler -->
+	<bean id="GRPSHandler" class="com.messanger.engine.uc.handler.GRPSHandler" >
+		<property name="commonService" ref="commonService" />
+	</bean>
+	
+	<!-- SendMemoHandler -->
+	<bean id="MEMSHandler" class="com.messanger.engine.uc.handler.MEMSHandler" >
+		<property name="messageSource" ref="messageSource" />
+		<property name="commonService" ref="commonService" />
+	</bean>
+	
+	<!-- SendMsgHandler -->
+	<bean id="MSGSHandler" class="com.messanger.engine.uc.handler.MSGSHandler" >
+		<property name="messageSource" ref="messageSource" />
+		<property name="commonService" ref="commonService" />
+	</bean>
+	
+	<!-- UserStatusChangeHandler -->
+	<bean id="USR_Handler" class="com.messanger.engine.uc.handler.USR_Handler" />
+	
+	<bean id="GWURHandler" class="com.messanger.engine.uc.handler.GWURHandler" >
+		<property name="messageSource" ref="messageSource" />
+		<property name="commonService" ref="commonService" />
+	</bean>
+	
+	<!-- Phone Handler -->
+	<bean id="PDIAHandler" class="com.messanger.engine.uc.handler.PDIAHandler">
+		<property name="iptService" ref="iptService" />
+		<property name="messageSource" ref="messageSource" />
+		<property name="config" ref="config" />
+	</bean>
+	
+	<bean id="PDISHandler" class="com.messanger.engine.uc.handler.PDISHandler">
+		<property name="iptService" ref="iptService" />
+		<property name="messageSource" ref="messageSource" />
+		<property name="config" ref="config" />
+	</bean>
+	
+	<bean id="PFWDHandler" class="com.messanger.engine.uc.handler.PFWDHandler">
+		<property name="iptService" ref="iptService" />
+		<property name="messageSource" ref="messageSource" />
+		<property name="config" ref="config" />
+	</bean>
+	
+	<!-- Web Conference Handler -->
+	<bean id="WCISHandler" class="com.messanger.engine.uc.handler.WCISHandler" >
+		<property name="messageSource" ref="messageSource" />
+		<property name="commonService" ref="commonService" />
+	</bean>
+	
+	<bean id="WCIRHandler" class="com.messanger.engine.uc.handler.WCIRHandler" >
+		<property name="messageSource" ref="messageSource" />		
+	</bean>
+	
+	<bean id="WCIOHandler" class="com.messanger.engine.uc.handler.WCIOHandler" >
+		<property name="messageSource" ref="messageSource" />		
+	</bean>
+	
+	<!-- Remote Control Handler -->
+	<bean id="RCISHandler" class="com.messanger.engine.uc.handler.RCISHandler" >
+		<property name="messageSource" ref="messageSource" />
+	</bean>
+	
+	<bean id="RCIRHandler" class="com.messanger.engine.uc.handler.RCIRHandler" >
+		<property name="messageSource" ref="messageSource" />		
+	</bean>
+	
+	<bean id="filterChainBuilder"
+		class="org.apache.mina.integration.spring.DefaultIoFilterChainBuilderFactoryBean">
+		<property name="filters">
+			<list>
+				<bean class="org.apache.mina.filter.codec.ProtocolCodecFilter">
+					<constructor-arg>
+						<bean class="com.messanger.engine.uc.codec.ProtocolCodecFactory" />
+					</constructor-arg>
+				</bean>
+				<bean class="org.apache.mina.filter.LoggingFilter" />
+				<bean class="org.apache.mina.filter.executor.ExecutorFilter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ioAcceptor"
+		class="org.apache.mina.integration.spring.IoAcceptorFactoryBean">
+		<property name="target">
+			<bean class="org.apache.mina.transport.socket.nio.SocketAcceptor" />
+		</property>
+		<property name="bindings">
+			<list>
+				<bean class="org.apache.mina.integration.spring.Binding">
+					<property name="address" value=":8099" />
+					<property name="handler" ref="demuxingUCServerHandler" />
+					<property name="serviceConfig">
+						<bean class="org.apache.mina.transport.socket.nio.SocketAcceptorConfig">
+							<property name="filterChainBuilder" ref="filterChainBuilder" />
+							<property name="reuseAddress" value="true" />
+						</bean>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- JMX stuff. Creates an MBeanServer. -->
+	<bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean">
+		<property name="locateExistingServerIfPossible" value="true" />
+	</bean>
+
+	<!-- JMX stuff. Creates an MBeanServer. -->
+	<bean id="exporter" class="org.springframework.jmx.export.MBeanExporter">
+		<property name="beans">
+			<map>
+				<entry key="ucServer:name=ioHandler">
+					<ref local="demuxingUCServerHandler" />
+				</entry>
+			</map>
+		</property>
+		<property name="assembler">
+			<bean
+				class="org.springframework.jmx.export.assembler.MethodNameBasedMBeanInfoAssembler">
+				<property name="managedMethods" value="isLoginUser,getNumberOfSession,kick" />
+			</bean>
+		</property>
+		<property name="server">
+			<ref local="mbeanServer" />
+		</property>
+	</bean>	
+	
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>classpath:/com/messanger/engine/uc/resources/Message</value>
+			</list>
+		</property>
+		<property name="cacheSeconds" value="1" />
+	</bean>
+	
+	<bean id="commonService"
+		class="com.messanger.engine.uc.service.CommonServiceImpl2" init-method="init">
+		<property name="config" ref="config" />
+		<property name="messageSource" ref="messageSource" />		
+		<property name="commonDaos" ref="commonDaos" />
+		<property name="iptService" ref="iptService" />
+	</bean>
+
+	<!--
+	<bean id="organizationXmlWriteService" class="org.springframework.scheduling.quartz.JobDetailBean" >
+		<property name="jobClass" value="com.messanger.engine.uc.service.OrganizationXmlWriteServiceImpl" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry>
+				<key><value>config</value></key>
+				<ref bean="config" />
+				</entry>
+				<entry>
+				<key><value>commonDaos</value></key>
+				<ref bean="commonDaos" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="xmlWriteTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="organizationXmlWriteService" />	
+		<property name="cronExpression" value="0 0 */2 * * ?" />
+	</bean>
+	-->
+	 		
+	<bean id="loadOrganizationJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="commonService" />
+		</property>
+		<property name="targetMethod">
+			<value>loadOrganization</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	
+	<bean id="loadOrganizationTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="loadOrganizationJobDetail" />
+		<!-- 
+			1 Seconds (0-59)
+			2 Minutes (0-59)
+			3 Hours (0-23)
+			4 Day of month (1-31)
+			5 Month (1-12 or JAN-DEC)
+			6 Day of week (1-7 or SUN-SAT)
+			7 Year (1970-2099)
+  		-->
+		<property name="cronExpression" value="0 0 */2 * * ?" />
+	</bean>
+	
+	<bean id="validationQueryJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="commonService" />
+		</property>
+		<property name="targetMethod">
+			<value>validationQuery</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="validationQueryTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="validationQueryJobDetail" />
+		</property>		
+		<property name="repeatInterval">
+			<value>${validataion.query.interval}</value>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>		
+				<ref bean="validationQueryTrigger" />
+				<ref bean="loadOrganizationTrigger" />				
+			</list>
+		</property>
+	</bean>	
+	 
+	<!-- ONIDHandler -->
+	<bean id="ONIDHandler" class="com.messanger.engine.uc.handler.ONIDHandler">
+		<property name="commonService" ref="commonService" />	
+	</bean>
+	
+	<!-- PWCHHandler -->
+	<bean id="PWCHHandler" class="com.messanger.engine.uc.handler.PWCHHandler">
+		<property name="commonService" ref="commonService" />
+	</bean>
+	
+		<!-- APNS -->
+<!--	<bean id="sqlMapClientMobileMail" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">-->
+<!--		<property name="configLocation"-->
+<!--			value="classpath:/com/messanger/mobile/mail/conf/SqlMapConfig.xml" />-->
+<!--		<property name="dataSource" ref="uwoDataSource" />-->
+<!--	</bean>-->
+	
+<!--	<bean id="mobilePushService"  class="com.messanger.mobile.mail.service.pojo.MobilePushService"  -->
+<!--		init-method="initCreditInfo">-->
+<!--		<property name="config" ref="config" />-->
+<!--		<property name="pushDAO" ref="mobilePushDAO" />-->
+<!--	</bean>-->
+<!--	-->
+<!--	<bean id="mobilePushDAO" class="com.messanger.mobile.mail.dao.common.MobilePushDAO">-->
+<!--		<property name="sqlMapClient" ref="sqlMapClientMobileMail" />-->
+<!--	</bean>-->
+	
+	<import resource="IptDummyContext.xml" />
+	<!--import resource="ciscoContext.xml" /-->
+	
+	<!--import resource="com/messanger/engine/fax/conf/faxContext.xml" /-->
+	 
+</beans>

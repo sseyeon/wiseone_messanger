@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<entry key="10001">The user does not exist</entry>
+	<entry key="10002">password is incorrect. </entry>
+	<entry key="10003">company information does not exist. </entry>
+	<entry key="10004">department information does not exist. </entry>
+	<entry key="10005">user information does not exist. </entry>
+	<entry key="10006">message type is incorrect. </entry>
+	<entry key="10007">UID bytes of the header length is incorrect.</entry>
+	<entry key="10008">Property values and the actual length of the block have different byte length of the property.</entry>
+	<entry key="10009">Data length does not match the actual data</entry>
+	<entry key="10010">Header of login message is invalid </entry>
+	<entry key="10011">locale information is incorrect. </entry>
+	<entry key="10013">Receive a message destination UID does not exist </entry>
+	<entry key="10014">Transfer message does not exist</entry>
+	<entry key="10015">(0) is not connected state. </entry>
+	<entry key="10016">(0) failed to send a message. </entry>
+	<entry key="10017">(0) failed to send a message. </entry>
+	<entry key="10018">Unable to connect to the database.</entry>
+	<entry key="10019">Unable to read configuration files. </entry>
+	<entry key="10020">Users folder, an error has occurred while creating</entry>
+	<entry key="10021">(0) user session does not exist. </entry>
+	<entry key="10022">Does not change the user status value</entry>
+	<entry key="10023">No chat room ID information </entry>
+	<entry key="10024">Transfer size of file does not exist</entry>
+	<entry key="10025"> size of the file does not contain information transfer. </entry>
+	<entry key="10026">To multiple users the ability to transfer files is not supported</entry>
+	<entry key="10027">The application code [(0)] does not currently support. </entry>
+	<entry key="10028">Current version [(0)] of client does not support. After upgrading to [(1)] versions of the client, please use.</entry>
+	<entry key="10029">Employee number information is not used in the domain('@') .</entry>
+	
+	<!-- XFon Message -->
+	<entry key="11001">PBX connected disability. PBX in a disconnected message has not been processed. Please try again later. </entry>
+	<entry key="11002">The requested number does not numeric. Please check and try again.</entry>
+	<entry key="11003">The requested number does not exist. Please check and try again.</entry>
+	<entry key="11004">Number of calls is not currently </entry>
+	<entry key="11005">The sender or the recipient's phone number, please check. </entry>
+	<entry key="11101">Have missed the call {0}({1}) from {2}</entry>
+	<entry key="11201">Phone number [(0)] is a type error. Please check.</entry>
+	
+	<!-- APNS -->
+	<entry key="C000011">메일 도착. [ {0} ]</entry>
+	<entry key="C000001">결제 도착.</entry>
+</properties>

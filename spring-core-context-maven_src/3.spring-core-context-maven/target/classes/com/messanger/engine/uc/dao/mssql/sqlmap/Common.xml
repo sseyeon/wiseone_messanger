@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="common">
+	<typeAlias alias="string" type="java.lang.String" />
+	<typeAlias alias="integer" type="java.lang.Integer" />
+	<typeAlias alias="user" type="com.messanger.engine.uc.model.User" />
+	<typeAlias alias="dept" type="com.messanger.engine.uc.model.Dept" />
+	<typeAlias alias="company"
+		type="com.messanger.engine.uc.model.Company" />
+	<typeAlias alias="domain"
+		type="com.messanger.engine.uc.model.Domain" />
+	<typeAlias alias="mail" type="com.messanger.engine.uc.model.Mail" />
+	<typeAlias alias="workflow"
+		type="com.messanger.engine.uc.model.WorkFlow" />
+
+	<resultMap id="selectDomainsResultMap" class="domain">
+		<result property="schema" column="schema_name" />
+		<result property="domain" column="domain_name" />
+		<result property="companyCode" column="comp_code" />
+	</resultMap>
+
+	<select id="selectDomains" resultMap="selectDomainsResultMap">
+		SELECT '00168' AS schema_name, 'mcst.go.kr' AS domain_name, '00168' AS comp_code
+	</select>
+
+	<resultMap id="selectUsersResultMap" class="user">
+		<result property="userindex" column="userindex" />
+		<result property="userid" column="userid" />
+		<result property="password" column="password" />
+		<result property="userName" column="user_name" />
+		<result property="companyCode" column="company_code" />
+		<result property="deptCode" column="dept_code" />
+		<result property="gradeCode" column="grade_code" />
+		<result property="gradeName" column="grade_name" />
+		<result property="dutyCode" column="duty_code" />
+		<result property="dutyName" column="duty_name" />
+		<result property="posCode" column="pos_code" />
+		<result property="posName" column="pos_name" />
+		<result property="sex" column="sex" />
+		<result property="email" column="email" />
+		<result property="domainName" column="domain_name" />
+		<result property="compPhoneNumber" column="compphone_number" />
+		<!-- <result property="homePhoneNumber" column="homephone_number"/> -->
+		<result property="mobileNumber" column="mobile_number" />
+		<result property="greetings" column="greetings" />
+		<result property="empno" column="empno" />
+		<result property="onlineId" column="online_id" />
+	</resultMap>
+	<select id="selectUsers" parameterClass="map" resultMap="selectUsersResultMap">
+		SELECT mid as userindex
+		, mid as userid
+		, mpw as password
+		, mname as user_name
+		, comcode as company_code
+		, decode as dept_code
+		, '0' as grade_code
+		, '0' as grade_name
+		, '0' as duty_code
+		, '0' as duty_name
+		, '0' as pos_code
+		, '0' as pos_name
+		, 'M' as sex
+		, memail as email
+		, mcompany as domain_name
+		, mhp as compphone_number
+		, mcode as empno
+		, mhp as mobile_number
+		, '' as greetings
+		, '' as online_id
+		FROM TblMember
+		order by MCode asc
+	</select>
+
+	<resultMap id="selectCompaniesResultMap" class="company">
+		<result property="companyCode" column="company_code" />
+		<result property="companyName" column="company_name" />
+		<result property="scompCode" column="schema_name" />
+		<result property="domainName" column="domain_name" />
+	</resultMap>
+
+	<select id="selectCompanies" parameterClass="map"
+		resultMap="selectCompaniesResultMap">
+		SELECT comcode as company_code
+		, company as company_name
+		, comcode as schema_name
+		, company as domain_name
+		FROM TblCompany
+		ORDER BY ComCode asc
+	</select>
+
+	<resultMap id="selectDeptsResultMap" class="dept">
+		<result property="companyCode" column="company_code" />
+		<result property="pdeptCode" column="pdept_code" />
+		<result property="deptCode" column="dept_code" />
+		<result property="deptName" column="dept_name" />
+	</resultMap>
+
+	<select id="selectDepts" parameterClass="map" resultMap="selectDeptsResultMap">
+		SELECT
+		comcode as company_code
+		, '00000' as pdept_code
+		, decode as dept_code
+		, department as dept_name
+		FROM TblDepartment
+		ORDER BY decode asc
+	</select>
+
+	<select id="selectUnreadMailCount" parameterClass="map"
+		resultClass="integer">
+		SELECT count(*)
+		FROM tma0010 a,
+		tma0020 b,
+		vor1030 c
+		WHERE a.message_id = b.message_id
+		AND b.userindex = c.userindex
+		AND c.email = #userid#
+		AND c.domain_name = #domain_name#
+		AND c.plural='0'
+		AND c.locale = #locale#
+		AND b.recovery_yn = '0'
+		AND b.read_yn = '0'
+		AND (b.boxid != 2 AND b.boxid != 3 AND b.boxid != 4 AND b.boxid != 9)
+		AND b.is_deleted = '0' 
+    </select>
+
+	<select id="selectUnreadWFCount" parameterClass="map"
+		resultClass="integer">
+	<![CDATA[    
+    	SELECT count(1)
+		FROM $schema$.tsa2010 t1,
+			 $schema$.tsa2011 t2,
+		 	 $schema$.tor1030 t3,
+		 	 $schema$.tor1010 t4
+		WHERE t1.sanc_id = t2.sanc_id
+		  AND t2.line_userindex = t3.userindex
+		  AND ( t2.read_auth = '1' OR (t2.read_auth = '0' AND $schema$.f_next_wdate(t1.create_date,1,t1.writer_company_code)> sysdate ))
+		  AND t2.sanc_type not in ('000','100')  
+	      AND t2.sancyn = '0'
+		  AND t1.status IN ('001','101','010','002','012')   
+		  AND t1.deleteyn = '0'
+		  AND t2.deleteyn = '0'
+		  AND t2.sanc_auth = '1'
+		  AND t3.COMPANY_CODE = t4.COMPANY_CODE
+		  AND t3.userid = #userid#
+		  AND t4.domain_name = #domain_name#
+		  AND t1.delegate_yn = '1'
+	]]>
+	</select>
+
+	<resultMap id="selectUnreadMailResultMap" class="mail">
+		<result property="messageId" column="message_id" />
+		<result property="subject" column="subject" />
+		<result property="sender" column="sender" />
+		<result property="recvDate" column="recv_date" />
+	</resultMap>
+
+	<select id="selectUnreadMail" parameterClass="map"
+		resultMap="selectUnreadMailResultMap">
+		SELECT * FROM (
+		SELECT a.message_id AS message_id,
+		a.subject AS subject,
+		a.sender AS sender,
+		to_char(b.recv_date,'yyyy-mm-dd hh24:mi') AS recv_date
+		FROM tma0010 a,
+		tma0020 b,
+		$schema$.vor1030 c
+		WHERE a.message_id = b.message_id
+		AND b.userindex = c.userindex
+		AND c.email = #userid#
+		AND c.domain_name = #domain_name#
+		AND c.plural='0'
+		AND c.locale = #locale#
+		AND b.recovery_yn = '0'
+		AND b.read_yn = '0'
+		AND (b.boxid != 2 AND b.boxid != 3 AND b.boxid != 4 AND b.boxid != 9)
+		AND b.is_deleted = '0'
+		ORDER BY b.recv_date DESC
+		)
+		WHERE rownum <![CDATA[<]]>
+		#query_cnt#
+	</select>
+
+	<resultMap id="selectUnreadWFResultMap" class="workflow">
+		<result property="sancId" column="sanc_id" />
+		<result property="subject" column="subject" />
+		<result property="createDate" column="create_date" />
+		<result property="writer" column="writer_name" />
+		<result property="formSeq" column="form_seq" />
+		<result property="formVer" column="form_ver" />
+	</resultMap>
+
+	<select id="selectUnreadWF" parameterClass="map"
+		resultMap="selectUnreadWFResultMap">
+
+		SELECT * FROM (
+		SELECT t1.sanc_id AS sanc_id,
+		t1.subject AS subject,
+		to_char(t1.create_date,'yyyy-mm-dd hh24:mi') AS create_date,
+		t1.writer_name AS writer_name ,
+		t1.form_seq AS form_seq,
+		t4.form_ver AS form_ver
+		FROM $schema$.tsa2010 t1,
+		$schema$.tsa2011 t2,
+		$schema$.vor1030 t3,
+		$schema$.tsa1011 t4
+		WHERE t1.sanc_id = t2.sanc_id
+		AND t2.line_userindex = t3.userindex
+		AND t1.form_seq = t4.form_seq
+		AND ( t2.read_auth = '1' OR (t2.read_auth = '0' AND
+		$schema$.f_next_wdate(t1.create_date,1,t1.writer_company_code)>
+		sysdate ))
+		AND t2.sanc_type not in ('000','100')
+		AND t2.sancyn = '0'
+		AND t1.status IN ('001','101','010')
+		AND t1.deleteyn = '0'
+		AND t2.deleteyn = '0'
+		AND t2.sanc_auth = '1'
+		AND t3.email = #userid#
+		AND t3.domain_name = #domain_name#
+		AND t3.plural ='0'
+		AND t3.locale = #locale#
+		AND t1.delegate_yn = '1'
+		ORDER BY create_date DESC
+		)
+		WHERE rownum <![CDATA[ < ]]>
+		#query_cnt#
+
+	</select>
+
+	<select id="validationQuery" resultClass="integer">
+		SELECT 1
+    </select>
+
+	<insert id="insert-login-info-new" parameterClass="map">
+		insert into tor1036 ( userid, domain, id, user_name, success_yn,
+		session_code, access_date, access_type, remote_host1, remote_host2)
+		values (#userId#, #domain#, #pk#, #userName#, #isSuccess#,
+		#sessionCode#, now(), #accessType#, #remoteIp1#, #remoteIp2#)
+	</insert>
+
+	<update id="updateOnlineId" parameterClass="map">
+		UPDATE msg_user
+		SET online_id = #onlineId#
+		WHERE userid = #userId# 
+ 	</update>
+
+</sqlMap>

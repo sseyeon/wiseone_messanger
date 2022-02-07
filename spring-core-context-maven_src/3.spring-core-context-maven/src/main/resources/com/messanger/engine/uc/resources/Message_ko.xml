@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<entry key="10001">존재하지 않는 사용자 입니다.</entry>
+	<entry key="10002">패스워드가 올바르지 않습니다.</entry>
+	<entry key="10003">회사정보가 존재하지 않습니다.</entry>
+	<entry key="10004">부서정보가 존재하지 않습니다.</entry>
+	<entry key="10005">사용자정보가 존재하지 않습니다.</entry>
+	<entry key="10006">메세지 타입이 올바르지 않습니다.</entry>
+	<entry key="10007">헤더의 UID의 바이트 길이가 올바르지 않습니다.</entry>
+	<entry key="10008">속성블럭의 길이값과  실제 속성의 바이트 길이가 다릅니다.</entry>
+	<entry key="10009">데이터길이의 값과 실제 데이터 바이트의  길이가 다릅니다.</entry>
+	<entry key="10010">로그인 메세지의 헤더타입이 올바르지 않습니다.</entry>
+	<entry key="10011">로케일 정보가 올바르지 않습니다.</entry>
+	<entry key="10013">메세지를 받을 대상 UID가 없습니다.</entry>
+	<entry key="10014">전송할 메세지가 없습니다.</entry>
+	<entry key="10015">{0}가 접속상태가 아닙니다.</entry>
+	<entry key="10016">{0}에게 메세지 전송을 실패했습니다.</entry>
+	<entry key="10017">{0}에게 쪽지 전송을 실패했습니다.</entry>
+	<entry key="10018">데이터베이스에 연결할 수 없습니다.</entry>
+	<entry key="10019">환경설정 파일을 읽을 수 없습니다.</entry>
+	<entry key="10020">시스템에 사용자 폴더를 만드는 중 에러가 발생 했습니다</entry>
+	<entry key="10021">{0} 사용자 세션은 존재하지 않습니다.</entry>
+	<entry key="10022">변경할 사용자의 상태값이 없습니다.</entry>
+	<entry key="10023">체팅방의 ID정보가 없습니다.</entry>
+	<entry key="10024">전송할 파일명 정보가 없습니다.</entry>
+	<entry key="10025">전송할 파일의 사이즈 정보가 없습니다.</entry>
+	<entry key="10026">여러명의 사용자에게 파일을 전달하는 기능은 현재 지원하지 않습니다.</entry>
+	<entry key="10027">해당 어플리케이션 코드[{0}]는 현재 지원하지 않습니다.</entry>
+	<entry key="10028">현재 사용하시는 버전[{0}]의 클라이언트는 지원하지 않습니다. [{1}] 버전 이상의 클라이언트로 업그레이드 후 사용해 주세요.</entry>
+	<entry key="10029">사번 정보에 도메인('@')은 붙지 않습니다.</entry>
+	<!-- XFon Message -->
+	<entry key="11001">PBX 연결 장애. PBX와 연결이 끊어져 메시지 처리를 하지 못하였습니다. 잠시후에 다시 시도해 주세요.</entry>
+	<entry key="11002">요청하신 번호가 숫자가 아닙니다. 확인 후 다시 시도해주세요.</entry>	
+	<entry key="11003">요청하신 번호가 없는 번호 입니다. 확인 후 다시 시도해주세요.</entry>
+	<entry key="11004">현재 통화 중인 번호가 아닙니다.</entry>
+	<entry key="11005">송신자 혹은 수신자의 전화 번호 값을 확인해주세요.</entry>	
+	
+	<entry key="11101">{0}({1})로 부터 {2}에 부재중 통화가 왔습니다.</entry>
+	<entry key="11201">전화 번호[{0}] 형식이 잘못 되었습니다. 확인해 주세요.</entry>
+	<!-- APNS -->
+	<entry key="C000011">메일 도착. [ {0} ]</entry>
+	<entry key="C000001">결제 도착.</entry>
+</properties>
