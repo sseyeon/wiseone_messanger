@@ -72,11 +72,11 @@
 		, pos_code as pos_code
 		, pos_name as pos_name
 		, sex as sex
-		, email as email
+		, CAST(AES_DECRYPT(UNHEX(email), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) as email
 		, domain_name as domain_name
-		, compphone_number as compphone_number
+		, CAST(AES_DECRYPT(UNHEX(compphone_number), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) as compphone_number
 		, empno as empno
-		, mobile_number as mobile_number
+		, CAST(AES_DECRYPT(UNHEX(mobile_number), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) as mobile_number
 		, greetings as greetings
 		, online_id as online_id
 		FROM msg_user

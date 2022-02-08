@@ -11,33 +11,23 @@
 		<result property="compPhoneNumber" column="compphone_number" />
 		<result property="onlineId" column="online_id" />
 	</resultMap>	
-	
-	<typeAlias alias="user" type="com.messanger.engine.uc.model.User" />
-	<resultMap id="selectUserByIdOrEmpNoResultMap" class="user">
-		
-		<result property="password" column="pwdhash" />
-		
-	</resultMap>	
-	
+
 	<select id="selectUserByUserId" parameterClass="map" resultMap="selectUserByIdOrEmpNoResultMap">
 		 <!-- 
 		SELECT mid as userid, mpw as pwdhash, mname as user_name, mid as empno, mhp as compphone_number, '' as online_id
 		FROM TblMember
 		WHERE mid = #userid#	
 		 -->
-		SELECT 
-			member_id userid, 
-			member_nm user_name, 
+		SELECT
+		userid userid,
+		user_name user_name,
 			pos_code posCode, 
-			dept_code deptCode, 
-			fn_seed128_decrypt(mobile) compphone_number, 
-			member_pw password,
-			fn_seed128_decrypt(email) email/*,
-			charge_yn,
-			auth_code */
-		FROM 
-			sst_member 
-		WHERE member_id=#userid# 
+			dept_code deptCode,
+		    CAST(AES_DECRYPT(UNHEX(compphone_number), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) compphone_number,
+		password password,
+			CAST(AES_DECRYPT(UNHEX(email), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) email
+		FROM msg_user
+		WHERE userid=#userid#
 		AND del_yn = 'N' 	
 	</select>
 	<select id="selectUserByEmpNo" parameterClass="map" resultMap="selectUserByIdOrEmpNoResultMap">
@@ -71,23 +61,21 @@
 		AND (B.DOMAIN_NAME IS NOT NULL OR C.SECONDARY IS NOT NULL)
 		AND A.USEYN = '1'
 		-->
-		
-		
-		SELECT 
-			member_id userid, 
-			member_nm user_name, 
-			pos_code posCode, 
-			dept_code deptCode, 
-			fn_seed128_decrypt(mobile) compphone_number, 
-			member_pw password,
-			fn_seed128_decrypt(email) email/*,
-			charge_yn,
-			auth_code */
-		FROM 
-			sst_member 
-		WHERE member_id=#userid# 
+
+
+		SELECT
+			userid userid,
+			user_name user_name,
+			pos_code posCode,
+			dept_code deptCode,
+			CAST(AES_DECRYPT(UNHEX(compphone_number), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) compphone_number,
+			password password,
+			CAST(AES_DECRYPT(UNHEX(email), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) email
+		FROM msg_user
+		WHERE empno=#userid#
 		AND del_yn = 'N'
 	</select>
+
 	<select id="selectPasswordBuilderClassName" parameterClass="String" resultClass="String">
 		SELECT ITEM_VALUE
 		FROM TCM6121
