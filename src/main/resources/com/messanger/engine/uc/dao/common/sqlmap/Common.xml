@@ -19,16 +19,18 @@
 		WHERE mid = #userid#	
 		 -->
 		SELECT
-		userid userid,
-		user_name user_name,
+			userid userid,
+			user_name user_name,
 			pos_code posCode, 
 			dept_code deptCode,
+			empno empno,
+		 	online_id online_id,
 		    CAST(AES_DECRYPT(UNHEX(compphone_number), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) compphone_number,
-		password password,
+			password password,
 			CAST(AES_DECRYPT(UNHEX(email), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) email
 		FROM msg_user
 		WHERE userid=#userid#
-		AND del_yn = 'N' 	
+		AND del_yn = 'N' 	 	
 	</select>
 	<select id="selectUserByEmpNo" parameterClass="map" resultMap="selectUserByIdOrEmpNoResultMap">
 		<!--  
@@ -68,6 +70,7 @@
 			user_name user_name,
 			pos_code posCode,
 			dept_code deptCode,
+			online_id online_id,
 			CAST(AES_DECRYPT(UNHEX(compphone_number), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) compphone_number,
 			password password,
 			CAST(AES_DECRYPT(UNHEX(email), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) email

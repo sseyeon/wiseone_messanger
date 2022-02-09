@@ -25,7 +25,7 @@
 	</resultMap>
 
 	<select id="selectUserByPassWord" parameterClass="map" resultMap="selectUserByPassWordResultMap">
-		SELECT CAST(AES_DECRYPT(UNHEX(#password#), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR) member_pw
+		SELECT SHA2(#password#, 256) member_pw
 	</select>
 
 	<select id="selectDomains" resultMap="selectDomainsResultMap">
@@ -270,7 +270,7 @@
  	
  	<update id="updatePassword" parameterClass="map">
 		UPDATE msg_user
-		SET password = HEX(AES_ENCRYPT(#password#, 'bUFDb3i!SPkD0C*WYROojA=='))
+		SET password = SHA2(#password#, 256)
 		WHERE userid = #userId#
 		  AND online_id = #onlineId#
  	</update>
