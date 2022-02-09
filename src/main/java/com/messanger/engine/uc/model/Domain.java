@@ -27,38 +27,38 @@ public class Domain {
     @XStreamAlias("companyCode")
     private String companyCode;
 
-//
-//    public String getSchema() {
-//        return schema;
-//    }
-//
-//    public void setSchema(String schema) {
-//        this.schema = schema;
-//    }
-//
-//    public String getDomain() {
-//        return domain;
-//    }
-//
-//    public void setDomain(String domain) {
-//        this.domain = domain;
-//    }
-//
-//	public String getDaoName() {
-//		return daoName;
-//	}
-//
-//	public void setDaoName(String daoName) {
-//		this.daoName = daoName;
-//	}
-//
-//	public String getCompanyCode() {
-//		return companyCode;
-//	}
-//
-//	public void setCompanyCode(String companyCode) {
-//		this.companyCode = companyCode;
-//	}
+
+    public String getSchema() {
+        return schema;
+    }
+
+    public void setSchema(String schema) {
+        this.schema = schema;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
+
+	public String getDaoName() {
+		return daoName;
+	}
+
+	public void setDaoName(String daoName) {
+		this.daoName = daoName;
+	}
+
+	public String getCompanyCode() {
+		return companyCode;
+	}
+
+	public void setCompanyCode(String companyCode) {
+		this.companyCode = companyCode;
+	}
 
 	
 }
