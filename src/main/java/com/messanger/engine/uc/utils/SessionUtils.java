@@ -33,7 +33,7 @@ public class SessionUtils {
      * @return
      */
     public static String getScheme(IoSession session) {
-        return session.getAttribute(Constants.SESSION_KEY_SCHEME) == null ? null : 
+        return session.getAttribute(Constants.SESSION_KEY_SCHEME) == null ? "00168" : 
             (String)session.getAttribute(Constants.SESSION_KEY_SCHEME);
     }
     
