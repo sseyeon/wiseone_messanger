@@ -294,7 +294,6 @@
 		<property name="iptService" ref="iptService" />
 	</bean>
 
-	<!--
 	<bean id="organizationXmlWriteService" class="org.springframework.scheduling.quartz.JobDetailBean" >
 		<property name="jobClass" value="com.messanger.engine.uc.service.OrganizationXmlWriteServiceImpl" />
 		<property name="jobDataAsMap">
@@ -315,7 +314,6 @@
 		<property name="jobDetail" ref="organizationXmlWriteService" />	
 		<property name="cronExpression" value="0 0 */2 * * ?" />
 	</bean>
-	-->
 	 		
 	<bean id="loadOrganizationJobDetail"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">

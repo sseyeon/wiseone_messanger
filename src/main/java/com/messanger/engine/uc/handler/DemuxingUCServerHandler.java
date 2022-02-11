@@ -89,8 +89,8 @@ public class DemuxingUCServerHandler extends DemuxingIoHandler {
      * 
      */
     public void sessionOpened(IoSession session) {
-//        SessionLog.info(session, "Open Session[" + session.toString() + "]");
-//        session.setIdleTime(IdleStatus.BOTH_IDLE, Constants.SESSION_IDLE);
+        SessionLog.info(session, "Open Session[" + session.toString() + "]");
+        session.setIdleTime(IdleStatus.BOTH_IDLE, Constants.SESSION_IDLE);
     }
     
     /**
