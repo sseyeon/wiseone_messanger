@@ -85,5 +85,41 @@
 		WHERE WAS_ID = #was_id#
 		AND CATEGORY_CODE = 'ST'
 		AND ITEM_CODE = 'PASSWORD_BUILDER_CLASS_NAME'
-	</select>	
+	</select>
+	<select id="selectGroupEmailByDept" parameterClass="String" resultClass="String">
+		WITH RECURSIVE cte AS (
+			SELECT dept_code
+			FROM   msg_dept
+			WHERE  dept_code = #dept_code#
+			UNION ALL
+			SELECT d.dept_code
+			FROM   msg_dept d
+					   INNER JOIN cte
+								  ON d.pdept_code = cte.dept_code
+		)
+
+		SELECT HEX(AES_ENCRYPT(email, 'bUFDb3i!SPkD0C*WYROojA=='))
+		FROM   msg_user u
+				   INNER JOIN cte
+							  ON u.dept_code = cte.dept_code
+	</select>
+
+	<resultMap id="messageTemplate" class="com.messanger.engine.uc.model.MessageTemplate">
+		<result property="templateId" column="template_id" />
+		<result property="type" column="type" />
+		<result property="title" column="title" />
+		<result property="messageBody" column="message_body" />
+		<result property="templateName" column="template_name" />
+		<result property="useYn" column="use_yn" />
+	</resultMap>
+	<select id="selectOneByTemplateIdAndEMail" parameterClass="String" resultMap="messageTemplate">
+		select template_id
+			 , type
+			 , title
+			 , message_body
+			 , template_name
+			 , use_yn
+		from msg_template
+		where template_id = #templateId#
+	</select>
 </sqlMap>

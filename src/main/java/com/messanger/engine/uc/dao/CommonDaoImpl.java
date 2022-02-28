@@ -1,21 +1,13 @@
 package com.messanger.engine.uc.dao;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.messanger.engine.uc.model.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
-import com.messanger.engine.uc.model.Company;
-import com.messanger.engine.uc.model.Dept;
-import com.messanger.engine.uc.model.Domain;
-import com.messanger.engine.uc.model.Mail;
-import com.messanger.engine.uc.model.User;
-import com.messanger.engine.uc.model.WorkFlow;
 import com.messanger.engine.uc.service.OrganizationXmlWriteServiceImpl;
 import com.messanger.engine.uc.utils.Cipher;
 import com.messanger.engine.uc.utils.DigestUtil;
@@ -239,7 +231,15 @@ public class CommonDaoImpl extends SqlMapClientDaoSupport implements ICommonDao 
 	public String selectPasswordBuilderClassName(String wasId) throws Exception {
 		return (String)getSqlMapClientTemplate().queryForObject("selectPasswordBuilderClassName", wasId);
 	}
-	
-	
-	
+
+
+	@Override
+	public Collection<String> selectAllGroupEmailByDept(String receiver) {
+		return getSqlMapClientTemplate().queryForList("selectGroupEmailByDept", receiver.replaceAll("@@", ""));
+	}
+
+	@Override
+	public MessageTemplate selectOneByTemplateIdAndEMail(String templateId) {
+		return (MessageTemplate)getSqlMapClientTemplate().queryForObject("selectOneByTemplateIdAndEMail", templateId);
+	}
 }

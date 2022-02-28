@@ -5,32 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.messanger.engine.uc.Constants;
-import com.messanger.engine.uc.message.request.ALCKRequest;
-import com.messanger.engine.uc.message.request.EVNTRequest;
-import com.messanger.engine.uc.message.request.FILDRequest;
-import com.messanger.engine.uc.message.request.FILRRequest;
-import com.messanger.engine.uc.message.request.FILSRequest;
-import com.messanger.engine.uc.message.request.GRPRRequest;
-import com.messanger.engine.uc.message.request.GRPSRequest;
-import com.messanger.engine.uc.message.request.GWURRequest;
-import com.messanger.engine.uc.message.request.LGINRequest;
-import com.messanger.engine.uc.message.request.MEMRRequest;
-import com.messanger.engine.uc.message.request.MEMSRequest;
-import com.messanger.engine.uc.message.request.MSGIRequest;
-import com.messanger.engine.uc.message.request.MSGRRequest;
-import com.messanger.engine.uc.message.request.MSGSRequest;
-import com.messanger.engine.uc.message.request.ONIDRequest;
-import com.messanger.engine.uc.message.request.ORG_Request;
-import com.messanger.engine.uc.message.request.PDIARequest;
-import com.messanger.engine.uc.message.request.PDISRequest;
-import com.messanger.engine.uc.message.request.PFWDRequest;
-import com.messanger.engine.uc.message.request.PWCHRequest;
-import com.messanger.engine.uc.message.request.RCIRRequest;
-import com.messanger.engine.uc.message.request.RCISRequest;
-import com.messanger.engine.uc.message.request.USR_Request;
-import com.messanger.engine.uc.message.request.WCIORequest;
-import com.messanger.engine.uc.message.request.WCIRRequest;
-import com.messanger.engine.uc.message.request.WCISRequest;
+import com.messanger.engine.uc.message.request.*;
 
 public final class MessageRequestFactory {
 private static final Map<String, Class<?>> repository = new HashMap<String, Class<?>>();
@@ -68,6 +43,8 @@ private static final Map<String, Class<?>> repository = new HashMap<String, Clas
         repository.put(Constants.TYPE_PASSWORD_CHANGE, PWCHRequest.class);
         
         repository.put(Constants.TYPE_PONC,         PDIARequest.class);
+
+        repository.put(Constants.TYPE_MAIL,         MAILRequest.class);
     }
     
     /**

@@ -49,6 +49,8 @@
 				<value>com.messanger.engine.uc.message.request.ONIDRequest</value>
 				<value>com.messanger.engine.uc.message.request.PWCHRequest</value>
 				<value>com.messanger.engine.uc.message.request.ORGSRequest</value>
+
+				<value>com.messanger.engine.uc.message.request.MAILRequest</value>
 			</list>
 		</constructor-arg>
 		<constructor-arg index="1">
@@ -81,6 +83,8 @@
 				<ref bean="ONIDHandler" />
 				<ref bean="PWCHHandler" />
 				<ref bean="ORGSHandler" />
+
+				<ref bean="MAILHandler"/>
 			</list>
 		</constructor-arg>
 		<property name="config" ref="config" />
@@ -380,6 +384,16 @@
 	<!-- PWCHHandler -->
 	<bean id="PWCHHandler" class="com.messanger.engine.uc.handler.PWCHHandler">
 		<property name="commonService" ref="commonService" />
+	</bean>
+
+	<!-- EMail 발송 -->
+	<bean id="mailService" class="com.messanger.engine.uc.service.SendMailService" init-method="init">
+		<property name="config" ref="config"/>
+		<property name="commonDao" ref="uwoCommonDao" />
+	</bean>
+
+	<bean id="MAILHandler" class="com.messanger.engine.uc.handler.MAILHandler">
+		<property name="mailService" ref="mailService"/>
 	</bean>
 	
 		<!-- APNS -->

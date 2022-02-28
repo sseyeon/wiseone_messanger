@@ -1,15 +1,11 @@
 package com.messanger.engine.uc.dao;
 
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import com.messanger.engine.uc.model.Company;
-import com.messanger.engine.uc.model.Dept;
-import com.messanger.engine.uc.model.Domain;
-import com.messanger.engine.uc.model.Mail;
-import com.messanger.engine.uc.model.User;
-import com.messanger.engine.uc.model.WorkFlow;
+import com.messanger.engine.uc.model.*;
 
 public interface ICommonDao {
 
@@ -146,4 +142,8 @@ public interface ICommonDao {
 
     public User selectUserByPassWord(Map<String, Object> parameterMap)
 			throws Exception;
+
+    Collection<String> selectAllGroupEmailByDept(String receiver);
+
+    MessageTemplate selectOneByTemplateIdAndEMail(String mailTemplateId);
 }

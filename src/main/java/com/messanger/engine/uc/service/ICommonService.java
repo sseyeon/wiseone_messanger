@@ -1,6 +1,7 @@
 package com.messanger.engine.uc.service;
 
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.Map;
 
 import com.messanger.engine.uc.model.User;

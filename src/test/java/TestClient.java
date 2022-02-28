@@ -37,8 +37,8 @@ public class TestClient {
         if (cf.isConnected()) {
             session = cf.getSession();
             System.out.println ("Connection succeeded");
-            loginTest(session);
-//            mailTest(session);
+//            loginTest(session);
+            mailTest(session);
         } else{
             System.out.println("Connection failed!!!");
         }
@@ -61,9 +61,9 @@ public class TestClient {
         MessageResponse message = new MessageResponse(Constants.TYPE_MAIL) {
         };
         message.setTransactionId("00000001");
-        message.setProperty(Constants.PROP_MAIL_RECEIVER, "abc@kakao.com");
-        message.setProperty(Constants.PROP_MAIL_SUBJECT, "TestMail 발송");
+        message.setProperty(Constants.PROP_MAIL_RECEIVER, "abc@kakao.com");// 리스트 메일 : 구분자 | 로 구분하여 전달. 그룹메일 : @@그룹코드
         message.setProperty(Constants.PROP_MAIL_CONTENT, "본문에 들어가는 확인");
+        message.setProperty(Constants.PROP_MAIL_TEMPLATE, "00000001");
 
         this.send(session, message);
     }

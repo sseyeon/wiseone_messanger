@@ -77,7 +77,10 @@ public final class Constants {
     public static final String   TYPE_GROUPWARE_UNREAD    = "GWUR";
     public static final String   TYPE_ONLINE_ID    		  = "ONID";
     public static final String   TYPE_PASSWORD_CHANGE	  = "PWCH";
-    
+
+    public static final String   TYPE_CHAT_GROUP          = "CHNL";
+    public static final String   TYPE_MAIL	              = "MAIL";
+
     public static final String   TYPE_PHONE_DIAL          = "PDIA";
     public static final String   TYPE_PHONE_HANGUP        = "PDIS";
     public static final String   TYPE_PHONE_FORWARD       = "PFWD";
@@ -132,7 +135,14 @@ public final class Constants {
     public static final String   PROP_DOMAIN              = "DOMN";
     public static final String   PROP_MSCD                = "MSCD";
     public static final String   PROP_EMPN                = "EMPN";
-    
+
+    public static final String   PROP_CHAT_GROUP          = "CHNL";
+    public static final String   PROP_GROUP_MESSAGE       = "GMSG";
+    public static final String   PROP_MAIL_RECEIVER       = "MRCV";
+    public static final String   PROP_MAIL_SUBJECT        = "MSUB";
+    public static final String   PROP_MAIL_CONTENT        = "MCNT";
+    public static final String   PROP_MAIL_TEMPLATE       = "MTMP";
+
     public static final String   APCD_CODE                = "C";
     public static final String   APCD_WF                  = "000001";
     public static final String   APCD_BOARD               = "000002";

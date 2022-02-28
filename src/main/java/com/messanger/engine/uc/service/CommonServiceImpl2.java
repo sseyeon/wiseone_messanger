@@ -3,14 +3,7 @@ package com.messanger.engine.uc.service;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
@@ -31,7 +24,7 @@ import com.thoughtworks.xstream.XStream;
  */
 public class CommonServiceImpl2 extends CommonServiceImpl {
 
-	//public static String ORGAN_COMPANY
+	//public s1tatic String ORGAN_COMPANY
 
 	protected Map<String, Domain> mapDomain;
 	protected Map<String, Object> mapOrgan;
@@ -413,19 +406,3 @@ public class CommonServiceImpl2 extends CommonServiceImpl {
 		return org.toString();
 	}
 }
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
