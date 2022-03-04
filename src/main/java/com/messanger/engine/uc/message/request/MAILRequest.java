@@ -16,10 +16,6 @@ public class MAILRequest extends MessageRequest {
         super(type);
     }
 
-    private String toAddr;
-    private String mailTemplate;
-    private String content;
-
     public String getToAddr() {
         return getProperty(Constants.PROP_MAIL_RECEIVER);
     }
@@ -28,7 +24,7 @@ public class MAILRequest extends MessageRequest {
         return getProperty(Constants.PROP_MAIL_CONTENT);
     }
 
-    public final String getMailTemplate() {
-        return getProperty(Constants.PROP_MAIL_TEMPLATE);
+    public final String getTemplateId() {
+        return getProperty(Constants.PROP_TEMPLATE_ID);
     }
 }

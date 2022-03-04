@@ -145,5 +145,9 @@ public interface ICommonDao {
 
     Collection<String> selectAllGroupEmailByDept(String receiver);
 
-    MessageTemplate selectOneByTemplateIdAndEMail(String mailTemplateId);
+    MessageTemplate selectOneByTemplateIdAndTypeIsEMail(String mailTemplateId);
+
+    MessageTemplate selectOneByTemplateIdAndTypeIsMessage(String mailTemplateId);
+
+    List<String> selectAllMemberByChannelId(String channelId);
 }

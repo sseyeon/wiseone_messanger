@@ -2,6 +2,7 @@ package com.messanger.engine.uc.handler;
 
 import java.util.Locale;
 
+import com.messanger.engine.uc.message.request.MEMSRequest;
 import org.apache.mina.common.IoSession;
 import org.apache.mina.common.WriteFuture;
 import org.apache.mina.handler.demux.MessageHandler;
@@ -26,6 +27,8 @@ public class MSGSHandler implements MessageHandler<MSGSRequest> {
 	ICommonService commonService;
     IoSessionContext ctx = IoSessionContext.getInstance();
     ReloadableResourceBundleMessageSource messageSource;
+
+    MEMSHandler memsHandler;
     
     /**
      * 
@@ -33,6 +36,10 @@ public class MSGSHandler implements MessageHandler<MSGSRequest> {
      */
     public void setCommonService(ICommonService commonService) {
         this.commonService = commonService;
+    }
+    
+    public void setMemsHandler(MEMSHandler memsHandler) {
+        this.memsHandler = memsHandler;
     }
     
     /**
@@ -108,6 +115,13 @@ public class MSGSHandler implements MessageHandler<MSGSRequest> {
                 }
                 //연결이 끊긴경우.
                 else {
+                    MEMSRequest memsRequest = new MEMSRequest(Constants.TYPE_SEND_MEMO);
+                    memsRequest.setTransactionId(request.getTransactionId());
+                    memsRequest.setProperty(Constants.PROP_SENDER_UID, request.getSenderUid());
+                    memsRequest.setProperty(Constants.PROP_RECEIVER_UID, receipt[i]);
+                    memsRequest.setProperty(Constants.PROP_SEND_MSG, request.getSendMsg());
+
+                    memsHandler.messageReceived(session, memsRequest);
                     errMsg += messageSource.getMessage("10015", new Object[]{receipt[i]}, locale);
                 }
             }

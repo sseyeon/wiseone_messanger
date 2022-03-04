@@ -94,14 +94,14 @@
 			UNION ALL
 			SELECT d.dept_code
 			FROM   msg_dept d
-					   INNER JOIN cte
-								  ON d.pdept_code = cte.dept_code
+				   INNER JOIN cte
+					  ON d.pdept_code = cte.dept_code
 		)
 
-		SELECT HEX(AES_ENCRYPT(email, 'bUFDb3i!SPkD0C*WYROojA=='))
+		SELECT CAST(AES_DECRYPT(UNHEX(u.email), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR)
 		FROM   msg_user u
-				   INNER JOIN cte
-							  ON u.dept_code = cte.dept_code
+		       INNER JOIN cte
+				  ON u.dept_code = cte.dept_code
 	</select>
 
 	<resultMap id="messageTemplate" class="com.messanger.engine.uc.model.MessageTemplate">
@@ -112,7 +112,7 @@
 		<result property="templateName" column="template_name" />
 		<result property="useYn" column="use_yn" />
 	</resultMap>
-	<select id="selectOneByTemplateIdAndEMail" parameterClass="String" resultMap="messageTemplate">
+	<select id="selectOneByTemplateIdAndEMail" parameterClass="map" resultMap="messageTemplate">
 		select template_id
 			 , type
 			 , title
@@ -121,5 +121,13 @@
 			 , use_yn
 		from msg_template
 		where template_id = #templateId#
+		and type = #type#
+	</select>
+
+	<select id="selectAllMemberByChannelId" parameterClass="String" resultClass="String">
+		SELECT email
+		FROM   msg_channel_menber
+		WHERE  use_yn = 'Y'
+		AND    channel_id = #channelId#
 	</select>
 </sqlMap>

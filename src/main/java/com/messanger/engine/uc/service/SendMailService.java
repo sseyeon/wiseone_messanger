@@ -82,7 +82,7 @@ public class SendMailService {
 
     public void send(String toMail, String mailTemplateId, Map<String, String> content) {
         try {
-            MessageTemplate messageTemplate = commonDao.selectOneByTemplateIdAndEMail(mailTemplateId);
+            MessageTemplate messageTemplate = commonDao.selectOneByTemplateIdAndTypeIsEMail(mailTemplateId);
             Template template = handlebars.compile(messageTemplate.getTemplateName());
             String contentString = template.apply(content);
             this.send(toMail, messageTemplate.getTitle(), contentString);

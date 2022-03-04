@@ -37,14 +37,15 @@ public class TestClient {
         if (cf.isConnected()) {
             session = cf.getSession();
             System.out.println ("Connection succeeded");
-//            loginTest(session);
+            loginTest(session);
             mailTest(session);
         } else{
             System.out.println("Connection failed!!!");
         }
     }
 
-    public void loginTest(IoSession session) {
+    // 로그인
+    private void loginTest(IoSession session) {
         MessageResponse message = new MessageResponse(Constants.TYPE_LOGIN) {
         };
         message.setTransactionId("00000001");
@@ -57,16 +58,27 @@ public class TestClient {
         this.send(session, message);
     }
 
-    public void mailTest(IoSession session) {
+    // 메일발송요청
+    private void mailTest(IoSession session) {
         MessageResponse message = new MessageResponse(Constants.TYPE_MAIL) {
         };
         message.setTransactionId("00000001");
         message.setProperty(Constants.PROP_MAIL_RECEIVER, "abc@kakao.com");// 리스트 메일 : 구분자 | 로 구분하여 전달. 그룹메일 : @@그룹코드
         message.setProperty(Constants.PROP_MAIL_CONTENT, "본문에 들어가는 확인");
-        message.setProperty(Constants.PROP_MAIL_TEMPLATE, "00000001");
+        message.setProperty(Constants.PROP_TEMPLATE_ID, "00000001");
 
         this.send(session, message);
     }
+
+    // 한명 또는 복수명에게 메시지를 전달합니다.
+    private void sendMessage() {
+        MessageResponse message = new MessageResponse(Constants.TYPE_RECEIVE_MEMO) {
+        };
+    }
+
+    // 특정 체널에 등록된 사용자에게 메시지 전달합니다.
+    private void sendChannelMessage() {}
+
 
     private void send(IoSession session, MessageResponse message) {
         SessionLog.info(session, "#E-S#");

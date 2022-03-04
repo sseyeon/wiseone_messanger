@@ -239,7 +239,24 @@ public class CommonDaoImpl extends SqlMapClientDaoSupport implements ICommonDao 
 	}
 
 	@Override
-	public MessageTemplate selectOneByTemplateIdAndEMail(String templateId) {
-		return (MessageTemplate)getSqlMapClientTemplate().queryForObject("selectOneByTemplateIdAndEMail", templateId);
+	public MessageTemplate selectOneByTemplateIdAndTypeIsEMail(String templateId) {
+		return this.selectOneByTemplateIdAndType(templateId, "E");
+	}
+
+	@Override
+	public MessageTemplate selectOneByTemplateIdAndTypeIsMessage(String templateId) {
+		return this.selectOneByTemplateIdAndType(templateId, "M");
+	}
+
+	private MessageTemplate selectOneByTemplateIdAndType(String templateId, String templateType) {
+		return (MessageTemplate)getSqlMapClientTemplate().queryForObject("selectOneByTemplateIdAndEMail", new HashMap<String, String>(){{
+			put("template_id", templateId);
+			put("type", templateType);
+		}});
+	}
+
+	@Override
+	public List<String> selectAllMemberByChannelId(String channelId) {
+		return getSqlMapClientTemplate().queryForList("selectAllMemberByChannelId", channelId);
 	}
 }

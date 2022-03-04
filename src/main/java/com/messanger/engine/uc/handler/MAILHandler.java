@@ -31,7 +31,7 @@ public class MAILHandler implements MessageHandler<MAILRequest> {
         String errMsg = "";
 
         long startTime = System.currentTimeMillis();
-        mailService.send(request.getToAddr(), request.getMailTemplate(), Collections.singletonMap("content", request.getContent()));
+        mailService.send(request.getToAddr(), request.getTemplateId(), Collections.singletonMap("content", request.getContent()));
         response.setResponseMsg(errMsg);
         session.write(response);
         SessionLog.info(session, "#H-E# MailHandler Elapse: "+String.format("%05d", System.currentTimeMillis()-startTime));
