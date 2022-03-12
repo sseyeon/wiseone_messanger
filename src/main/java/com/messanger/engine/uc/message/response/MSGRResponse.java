@@ -2,6 +2,7 @@ package com.messanger.engine.uc.message.response;
 
 import com.messanger.engine.uc.Constants;
 import com.messanger.engine.uc.message.MessageResponse;
+import com.messanger.engine.uc.model.SecureType;
 
 public class MSGRResponse extends MessageResponse {
 
@@ -35,5 +36,8 @@ public class MSGRResponse extends MessageResponse {
     
     public final void setMsgColor(String color) {
     	setProperty(Constants.PROP_MSG_COLOR, color);
+    }
+    public final void setSecureType(SecureType secureType) {
+    	setProperty(Constants.PROP_REQUEST_TYPE, secureType.getCode());
     }
 }

@@ -3,6 +3,7 @@ package com.messanger.engine.uc.handler;
 import java.util.Locale;
 
 import com.messanger.engine.uc.message.request.MEMSRequest;
+import com.messanger.engine.uc.model.SecureType;
 import org.apache.mina.common.IoSession;
 import org.apache.mina.common.WriteFuture;
 import org.apache.mina.handler.demux.MessageHandler;
@@ -68,6 +69,8 @@ public class MSGSHandler implements MessageHandler<MSGSRequest> {
             String msgEffect = request.getMsgEffect();
             String msgSize = request.getMsgSize();
             String msgColor = request.getMsgColor();
+
+            SecureType secureType = request.getSecureType();
             
             /*
             IoSessionContext context = IoSessionContext.getInstance();
@@ -103,6 +106,10 @@ public class MSGSHandler implements MessageHandler<MSGSRequest> {
                     }
                     if(msgColor != null) {
                     	rcvMsg.setMsgColor(msgColor);
+                    }
+
+                    if(secureType != null) {
+                        rcvMsg.setSecureType(secureType);
                     }
                     
                     WriteFuture future = targetSession.write(rcvMsg);

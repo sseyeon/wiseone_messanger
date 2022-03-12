@@ -1,5 +1,6 @@
 package com.messanger.engine.uc.message.request;
 
+import com.messanger.engine.uc.model.SecureType;
 import org.apache.commons.lang.StringUtils;
 
 import com.messanger.engine.uc.Constants;
@@ -37,5 +38,9 @@ public class MSGSRequest extends MessageRequest {
     
     public final String getMsgColor() {
     	return getProperty(Constants.PROP_MSG_COLOR);
+    }
+
+    public SecureType getSecureType() {
+        return SecureType.findByCode(getProperty(Constants.PROP_REQUEST_TYPE));
     }
 }

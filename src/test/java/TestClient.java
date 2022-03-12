@@ -43,7 +43,8 @@ public class TestClient {
 //            loginTest(session);
 //            mailTest(session);
 //            sendChannelMessage(session);
-            webhook(session);
+//            webhook(session);
+            sendMessage(session);
         } else{
             System.out.println("Connection failed!!!");
         }
@@ -77,8 +78,14 @@ public class TestClient {
 
     // 한명 또는 복수명에게 메시지를 전달합니다.
     private void sendMessage(IoSession session) {
-        MessageResponse message = new MessageResponse(Constants.TYPE_RECEIVE_MEMO) {
-        };
+        MessageResponse message = new MessageResponse(Constants.TYPE_SEND_MSG) {};
+        message.setTransactionId("00000001");
+        message.setProperty(Constants.PROP_SENDER_UID, "hjpark@unicologx.com");
+        message.setProperty(Constants.PROP_RECEIVER_UID, "jskim@unicologx.com|milky@unicologx.com");
+        message.setProperty(Constants.PROP_ROOM_ID, "R0000001");
+        message.setProperty(Constants.PROP_REQUEST_TYPE, SecureType.USB.getCode());
+        message.setProperty(Constants.PROP_LOCALE, "ko_KR");
+        this.send(session, message);
     }
 
     // 특정 체널에 등록된 사용자에게 메시지 전달합니다.
