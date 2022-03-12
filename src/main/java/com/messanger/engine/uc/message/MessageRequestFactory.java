@@ -45,6 +45,8 @@ private static final Map<String, Class<?>> repository = new HashMap<String, Clas
         repository.put(Constants.TYPE_PONC,         PDIARequest.class);
 
         repository.put(Constants.TYPE_MAIL,         MAILRequest.class);
+        repository.put(Constants.TYPE_GROUP_MESSAGE,         RMSGRequest.class);
+        repository.put(Constants.TYPE_WHOK,         WHOKRequest.class);
     }
     
     /**

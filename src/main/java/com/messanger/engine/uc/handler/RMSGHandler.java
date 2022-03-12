@@ -33,7 +33,7 @@ public class RMSGHandler implements MessageHandler<RMSGRequest> {
     public void messageReceived(IoSession session, RMSGRequest request) throws Exception {
         SessionLog.info(session, "#H-S# InputSystemMsgHandler");
 
-        Locale locale = SessionUtils.getRequestLocale(request);
+//        Locale locale = SessionUtils.getRequestLocale(request);
         RMSGResponse response = new RMSGResponse(request.getType());
         response.setTransactionId(request.getTransactionId());
 
@@ -48,8 +48,9 @@ public class RMSGHandler implements MessageHandler<RMSGRequest> {
         msgsRequest.setTransactionId(request.getTransactionId());
         msgsRequest.setProperty(Constants.PROP_RECEIVER_UID, String.join(Constants.PROP_DELIM, receiverList)); // DB에서 조회
         msgsRequest.setProperty(Constants.PROP_SENDER_UID, request.getSenderUid());
+        msgsRequest.setProperty(Constants.PROP_ROOM_ID, request.getSenderUid());
         msgsRequest.setProperty(Constants.PROP_SEND_MSG, messageTemplate.getMessageBody());
-        msgsRequest.setProperty(Constants.PROP_ROOM_ID, request.getChannelId());
+//        msgsRequest.setProperty(Constants.PROP_ROOM_ID, request.getChannelId());
         msgsRequest.setProperty(Constants.PROP_MSG_FONT, msgType.getFont());
         msgsRequest.setProperty(Constants.PROP_MSG_EFFECT, msgType.getEffect());
         msgsRequest.setProperty(Constants.PROP_MSG_SIZE, msgType.getFontSize().toString());

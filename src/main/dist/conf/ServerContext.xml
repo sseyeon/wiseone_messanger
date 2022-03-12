@@ -51,7 +51,8 @@
 				<value>com.messanger.engine.uc.message.request.ORGSRequest</value>
 
 				<value>com.messanger.engine.uc.message.request.MAILRequest</value>
-				<value>com.messanger.engine.uc.message.request.RMSGHandler</value>
+				<value>com.messanger.engine.uc.message.request.RMSGRequest</value>
+				<value>com.messanger.engine.uc.message.request.WHOKRequest</value>
 			</list>
 		</constructor-arg>
 		<constructor-arg index="1">
@@ -86,6 +87,8 @@
 				<ref bean="ORGSHandler" />
 
 				<ref bean="MAILHandler"/>
+				<ref bean="RMSGHandler"/>
+				<ref bean="WHOKHandler"/>
 			</list>
 		</constructor-arg>
 		<property name="config" ref="config" />
@@ -216,7 +219,7 @@
 	<bean id="RCISHandler" class="com.messanger.engine.uc.handler.RCISHandler" >
 		<property name="messageSource" ref="messageSource" />
 	</bean>
-	
+
 	<bean id="RCIRHandler" class="com.messanger.engine.uc.handler.RCIRHandler" >
 		<property name="messageSource" ref="messageSource" />		
 	</bean>
@@ -398,9 +401,13 @@
 		<property name="mailService" ref="mailService"/>
 	</bean>
 
-	<bean id="CHNLHandler" class="com.messanger.engine.uc.handler.RMSGHandler">
+	<bean id="RMSGHandler" class="com.messanger.engine.uc.handler.RMSGHandler">
 		<property name="commonDao" ref="uwoCommonDao" />
 		<property name="msgsHandler" ref="MSGSHandler" />
+	</bean>
+
+	<bean id="WHOKHandler" class="com.messanger.engine.uc.handler.WHOKHandler">
+		<property name="config" ref="config" />
 	</bean>
 
 		<!-- APNS -->

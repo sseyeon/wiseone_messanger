@@ -50,7 +50,7 @@ public class IoSessionContext {
     
     /**
      * 
-     * @param uid
+     * @param key
      * @return
      */
     public IoSession getSession(String key) {

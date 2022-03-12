@@ -120,12 +120,12 @@
 			 , template_name
 			 , use_yn
 		from msg_template
-		where template_id = #templateId#
+		where template_id = #template_id#
 		and type = #type#
 	</select>
 
 	<select id="selectAllMemberByChannelId" parameterClass="String" resultClass="String">
-		SELECT email
+		SELECT CAST(AES_DECRYPT(UNHEX(email), 'bUFDb3i!SPkD0C*WYROojA==') AS CHAR)
 		FROM   msg_channel_menber
 		WHERE  use_yn = 'Y'
 		AND    channel_id = #channelId#

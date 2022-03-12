@@ -22,6 +22,6 @@ public class RMSGRequest extends MessageRequest {
         return getProperty(Constants.PROP_TEMPLATE_ID);
     }
     public MsgType getMessageType() {
-        return MsgType.findByCode(getProperty(Constants.PROP_TEMPLATE_ID));
+        return MsgType.findByCode(getProperty(Constants.PROP_MESSAGE_TYPE));
     }
 }

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.messanger.engine.uc.message.response.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.mina.common.ByteBuffer;
 import org.apache.mina.common.IoSession;
@@ -15,33 +16,6 @@ import org.apache.mina.util.SessionLog;
 
 import com.messanger.engine.uc.Constants;
 import com.messanger.engine.uc.message.MessageResponse;
-import com.messanger.engine.uc.message.response.EVNTResponse;
-import com.messanger.engine.uc.message.response.FILDResponse;
-import com.messanger.engine.uc.message.response.FILRResponse;
-import com.messanger.engine.uc.message.response.FILSResponse;
-import com.messanger.engine.uc.message.response.GRPRResponse;
-import com.messanger.engine.uc.message.response.GRPSResponse;
-import com.messanger.engine.uc.message.response.GWURResponse;
-import com.messanger.engine.uc.message.response.LGINResponse;
-import com.messanger.engine.uc.message.response.MEMRResponse;
-import com.messanger.engine.uc.message.response.MEMSResponse;
-import com.messanger.engine.uc.message.response.MSGIResponse;
-import com.messanger.engine.uc.message.response.MSGRResponse;
-import com.messanger.engine.uc.message.response.MSGSResponse;
-import com.messanger.engine.uc.message.response.ONIDResponse;
-import com.messanger.engine.uc.message.response.ORG_Response;
-import com.messanger.engine.uc.message.response.PCIFResponse;
-import com.messanger.engine.uc.message.response.PDIAResponse;
-import com.messanger.engine.uc.message.response.PDISResponse;
-import com.messanger.engine.uc.message.response.PFWDResponse;
-import com.messanger.engine.uc.message.response.PSTAResponse;
-import com.messanger.engine.uc.message.response.PWCHResponse;
-import com.messanger.engine.uc.message.response.RCIRResponse;
-import com.messanger.engine.uc.message.response.RCISResponse;
-import com.messanger.engine.uc.message.response.USR_Response;
-import com.messanger.engine.uc.message.response.WCIOResponse;
-import com.messanger.engine.uc.message.response.WCIRResponse;
-import com.messanger.engine.uc.message.response.WCISResponse;
 import com.messanger.engine.uc.utils.StackTracer;
 
 /**
@@ -88,7 +62,10 @@ private static final Set<Class<?>> TYPES;
         
         types.add(ONIDResponse.class);
         types.add(PWCHResponse.class);
-        
+
+        types.add(RMSGResponse.class);
+        types.add(WHOKResponse.class);
+
         TYPES = Collections.unmodifiableSet(types);
     }
 

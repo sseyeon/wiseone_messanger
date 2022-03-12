@@ -1,5 +1,8 @@
 import com.messanger.engine.uc.Constants;
 import com.messanger.engine.uc.message.MessageResponse;
+import com.messanger.engine.uc.model.MsgType;
+import com.messanger.engine.uc.model.RequestAnswer;
+import com.messanger.engine.uc.model.SecureType;
 import com.messanger.engine.uc.utils.StackTracer;
 import org.apache.commons.lang.StringUtils;
 import org.apache.mina.common.*;
@@ -37,8 +40,10 @@ public class TestClient {
         if (cf.isConnected()) {
             session = cf.getSession();
             System.out.println ("Connection succeeded");
-            loginTest(session);
-            mailTest(session);
+//            loginTest(session);
+//            mailTest(session);
+//            sendChannelMessage(session);
+            webhook(session);
         } else{
             System.out.println("Connection failed!!!");
         }
@@ -71,13 +76,37 @@ public class TestClient {
     }
 
     // 한명 또는 복수명에게 메시지를 전달합니다.
-    private void sendMessage() {
+    private void sendMessage(IoSession session) {
         MessageResponse message = new MessageResponse(Constants.TYPE_RECEIVE_MEMO) {
         };
     }
 
     // 특정 체널에 등록된 사용자에게 메시지 전달합니다.
-    private void sendChannelMessage() {}
+    private void sendChannelMessage(IoSession session) {
+        MessageResponse message = new MessageResponse(Constants.TYPE_GROUP_MESSAGE) {
+        };
+        message.setTransactionId("00000001");
+        message.setProperty(Constants.PROP_CHANNEL_ID, "SYS10001");// 리스트 메일 : 구분자 | 로 구분하여 전달. 그룹메일 : @@그룹코드
+        message.setProperty(Constants.PROP_TEMPLATE_ID, "00000002");
+        message.setProperty(Constants.PROP_SENDER_UID, "hjpark@unicologx.com");
+        message.setProperty(Constants.PROP_MESSAGE_TYPE, MsgType.GENERAL.getCode());
+
+
+        this.send(session, message);
+    }
+
+    private void webhook(IoSession session) {
+        MessageResponse message = new MessageResponse(Constants.TYPE_WHOK) {
+        };
+        message.setTransactionId("00000001");
+        message.setProperty(Constants.PROP_SENDER_UID, "SYS10001");// 리스트 메일 : 구분자 | 로 구분하여 전달. 그룹메일 : @@그룹코드
+        message.setProperty(Constants.PROP_TEMPLATE_ID, "00000002");
+        message.setProperty(Constants.PROP_RECEIVER_UID, "hjpark@unicologx.com");
+        message.setProperty(Constants.PROP_REQUEST_TYPE, SecureType.USB.getCode());
+        message.setProperty(Constants.PROP_REQUEST_ANSWER, RequestAnswer.APPROVAL.getCode());
+
+        this.send(session, message);
+    }
 
 
     private void send(IoSession session, MessageResponse message) {

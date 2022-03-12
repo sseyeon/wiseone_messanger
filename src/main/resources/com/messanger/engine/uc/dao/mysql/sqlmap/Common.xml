@@ -25,7 +25,7 @@
 	</resultMap>
 
 	<select id="selectUserByPassWord" parameterClass="map" resultMap="selectUserByPassWordResultMap">
-		SELECT SHA2(#password#, 256) member_pw
+		SELECT HEX(AES_ENCRYPT(#password#, 'bUFDb3i!SPkD0C*WYROojA==')) member_pw
 	</select>
 
 	<select id="selectDomains" resultMap="selectDomainsResultMap">

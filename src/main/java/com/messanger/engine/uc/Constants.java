@@ -78,8 +78,9 @@ public final class Constants {
     public static final String   TYPE_ONLINE_ID    		  = "ONID";
     public static final String   TYPE_PASSWORD_CHANGE	  = "PWCH";
 
-    public static final String   TYPE_GROUP_MESSAGE       = "GMSG";
+    public static final String   TYPE_GROUP_MESSAGE       = "RMSG";
     public static final String   TYPE_MAIL	              = "MAIL";
+    public static final String   TYPE_WHOK	              = "WHOK";
 
     public static final String   TYPE_PHONE_DIAL          = "PDIA";
     public static final String   TYPE_PHONE_HANGUP        = "PDIS";
@@ -140,7 +141,10 @@ public final class Constants {
     public static final String   PROP_MAIL_RECEIVER       = "MRCV";
     public static final String   PROP_MAIL_SUBJECT        = "MSUB";
     public static final String   PROP_MAIL_CONTENT        = "MCNT";
-    public static final String   PROP_TEMPLATE_ID       = "MTMP";
+    public static final String   PROP_TEMPLATE_ID         = "MTMP";
+    public static final String   PROP_MESSAGE_TYPE        = "TYPE";
+    public static final String   PROP_REQUEST_ANSWER      = "ANSW";
+    public static final String   PROP_REQUEST_TYPE        = "REQT";
 
     public static final String   APCD_CODE                = "C";
     public static final String   APCD_WF                  = "000001";

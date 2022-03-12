@@ -5,33 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.messanger.engine.uc.Constants;
-import com.messanger.engine.uc.message.response.EVNTResponse;
-import com.messanger.engine.uc.message.response.FILDResponse;
-import com.messanger.engine.uc.message.response.FILRResponse;
-import com.messanger.engine.uc.message.response.FILSResponse;
-import com.messanger.engine.uc.message.response.GRPRResponse;
-import com.messanger.engine.uc.message.response.GRPSResponse;
-import com.messanger.engine.uc.message.response.GWURResponse;
-import com.messanger.engine.uc.message.response.LGINResponse;
-import com.messanger.engine.uc.message.response.MEMRResponse;
-import com.messanger.engine.uc.message.response.MEMSResponse;
-import com.messanger.engine.uc.message.response.MSGIResponse;
-import com.messanger.engine.uc.message.response.MSGRResponse;
-import com.messanger.engine.uc.message.response.MSGSResponse;
-import com.messanger.engine.uc.message.response.ONIDResponse;
-import com.messanger.engine.uc.message.response.ORG_Response;
-import com.messanger.engine.uc.message.response.PCIFResponse;
-import com.messanger.engine.uc.message.response.PDIAResponse;
-import com.messanger.engine.uc.message.response.PDISResponse;
-import com.messanger.engine.uc.message.response.PFWDResponse;
-import com.messanger.engine.uc.message.response.PSTAResponse;
-import com.messanger.engine.uc.message.response.PWCHResponse;
-import com.messanger.engine.uc.message.response.RCIRResponse;
-import com.messanger.engine.uc.message.response.RCISResponse;
-import com.messanger.engine.uc.message.response.USR_Response;
-import com.messanger.engine.uc.message.response.WCIOResponse;
-import com.messanger.engine.uc.message.response.WCIRResponse;
-import com.messanger.engine.uc.message.response.WCISResponse;
+import com.messanger.engine.uc.message.response.*;
 
 public class MessageResponseFactory {
 private static final Map<String, Class<?>> repository = new HashMap<String, Class<?>>();
@@ -69,6 +43,10 @@ private static final Map<String, Class<?>> repository = new HashMap<String, Clas
         
         repository.put(Constants.TYPE_ONLINE_ID, ONIDResponse.class);
         repository.put(Constants.TYPE_PASSWORD_CHANGE, PWCHResponse.class);
+
+        repository.put(Constants.TYPE_MAIL,         MAILResponse.class);
+        repository.put(Constants.TYPE_GROUP_MESSAGE,         RMSGResponse.class);
+        repository.put(Constants.TYPE_WHOK,         WHOKResponse.class);
     }
     
     /**
