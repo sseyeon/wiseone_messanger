@@ -4,13 +4,10 @@
 	<groupId>com.xxxx.xxxx</groupId>
 	<artifactId>messanger</artifactId>
 	<version>1.0.0</version>
-    <modules>
-        <module>MessangerScoketClient</module>
-    </modules>
-    <name>messanger</name>
+	<name>messanger</name>
 	<description></description>
 	<url>http://www.xxxx.com</url>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
